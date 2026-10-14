@@ -1,0 +1,10 @@
+---
+import { whatsappUrl } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { subject?: string; variant?: 'primary' | 'light' | 'text'; class?: string; }
+const { subject = '', variant = 'primary', class: className = '' } = Astro.props;
+---
+<a class:list={['contact-link', `contact-link--${variant}`, className]} href={whatsappUrl(subject)} target="_blank" rel="noopener noreferrer">
+  <slot>Consultar pelo WhatsApp</slot><Icon name="arrow" size={20} />
+  <span class="sr-only"> (abre o WhatsApp em nova aba)</span>
+</a>

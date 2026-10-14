@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Pátio amigo: cachorro sob um arco</title>
+  <rect width="256" height="256" rx="48" fill="#F3D879"/><path fill="#164D56" fill-rule="evenodd" d="M128 24A80 80 0 0 1 208 104V208A24 24 0 0 1 184 232H72A24 24 0 0 1 48 208V104A80 80 0 0 1 128 24Z M128 58A46 46 0 0 0 82 104V190A12 12 0 0 0 94 202H162A12 12 0 0 0 174 190V104A46 46 0 0 0 128 58Z"/>
+  <path fill="#164D56" d="M82 94Q64 104 55 119Q49 132 60 147L72 159Q82 169 89 154Q96 136 98 116Q92 103 82 94Z M174 94Q192 104 201 119Q207 132 196 147L184 159Q174 169 167 154Q160 136 158 116Q164 103 174 94Z M112 152Q128 145 144 152Q152 159 141 168L132 175Q128 178 124 175L115 168Q104 159 112 152Z"/>
+  <circle cx="108" cy="127" r="9" fill="#164D56"/><circle cx="148" cy="127" r="9" fill="#164D56"/>
+</svg>
+
+

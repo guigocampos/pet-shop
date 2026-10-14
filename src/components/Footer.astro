@@ -1,0 +1,12 @@
+---
+import { site, navigation } from '../data/site';
+import ContactLink from './ContactLink.astro';
+---
+<footer class="site-footer">
+  <div class="container footer-columns">
+    <div><a class="brand-mark" href="/" aria-label={`${site.name} — início`}><img src={site.images.logo} width="72" height="72" alt="" /></a><p>{site.tagline}</p><p>{site.city}, {site.state}</p></div>
+    <nav aria-label="Rodapé"><p class="footer-label">Explore o Pátio</p>{navigation.map(link => <a href={link.href}>{link.label}</a>)}</nav>
+    <div class="footer-contact"><p class="footer-label">{site.demo ? 'Contato da demonstração' : 'Fale com a gente'}</p><a class="phone-link" href={`tel:+${site.demo ? site.demoPhone : site.businessPhone}`}>{site.demo ? site.demoPhoneLabel : site.businessPhone}</a><ContactLink variant="text">WhatsApp {site.demo ? 'da Ghati' : ''}</ContactLink><a class="text-link" href="/contato/">Informações de contato →</a>{site.socialUrl && <a class="text-link" href={site.socialUrl} target="_blank" rel="noopener noreferrer">Instagram ↗</a>}</div>
+  </div>
+  <div class="container footer-bottom"><p>© {new Date().getFullYear()} {site.name}{site.demo ? ' · Marca fictícia para demonstração comercial.' : '.'}</p><p>{site.demo ? 'Uma demonstração Ghati. Imagens ilustrativas.' : 'Feito para estar por perto.'}</p></div>
+</footer>

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactLink from '../components/ContactLink.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import { site, infoPages, hasServices, hasProducts } from '../data/site';
+export function getStaticPaths() {
+  return infoPages.map(page => ({ params: { infoPage: page.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+---
+<Base title={`${page.label} | ${site.name} em ${site.city}`} description={`${page.intro} ${site.demo ? 'Demonstração comercial Ghati.' : ''}`}>
+  <section class:list={['page-hero', `page-hero--${page.slug}`]}><div class="container"><Breadcrumbs label={page.label} /><p class="eyebrow">{page.label} · {site.city}</p><h1>{page.title}</h1><p class="page-intro">{page.intro}</p></div></section>
+
+  {page.slug === 'quem-somos' && <>
+    <section class="about-section"><div class="container about-grid"><figure class="about-photo"><img src={site.images.companion} srcset={`${site.images.companionSmall} 400w, ${site.images.companion} 800w`} sizes="(max-width: 600px) calc(100vw - 40px), 50vw" alt="Dois cães em um passeio ao ar livre, fotografia ilustrativa" width="800" height="900" loading="lazy" /><figcaption>Companhia para os momentos de todo dia.<br /><span>Fotografia ilustrativa.</span></figcaption></figure><div class="about-copy"><p class="eyebrow">NOSSO JEITO DE CUIDAR</p><h2>{site.about.title}</h2><p class="about-description">{site.about.description}</p><div class="principles">{site.about.principles.map(principle => <article><h3>{principle.title}</h3><p>{principle.text}</p></article>)}</div></div></div></section>
+    <section class="container section-space"><div class="section-heading"><h2>Faça parte<br />dessa conversa.</h2><p class="section-intro">Conheça os cuidados e encontre as respostas para planejar a rotina do seu companheiro.</p></div><div class="related-links">{hasServices && <a href="/banho-e-tosa/">Conhecer os serviços <Icon name="arrow" /></a>}{hasProducts && <a href="/loja/">Conhecer a loja <Icon name="arrow" /></a>}<a href="/contato/">Falar com a gente <Icon name="arrow" /></a></div></section>
+  </>}
+
+  {page.slug === 'loja' && <>
+    <section class="products-section section-space"><div class="container"><p class="eyebrow">O QUE VOCÊ ENCONTRA</p><h2>O cuidado continua em casa.</h2><div class="product-list">{site.products.map(product => <article><Icon name={product.icon} size={48} /><h3>{product.name}</h3><p>{product.description}</p><ContactLink subject={product.name.toLowerCase()} variant="text">Consultar opções</ContactLink></article>)}</div></div></section>
+    <section class="preparation"><div class="container preparation-grid"><div><p class="eyebrow">SEM COMPLICAÇÃO</p><h2>Procurando algo específico?</h2><p class="section-intro">Mande o nome ou uma foto do produto. A conversa ajuda a encontrar a opção que faz sentido para a sua rotina.</p></div><div><ol class="steps-list"><li><span>01</span><div><h3>Conte o que procura</h3><p>Informe o item, a marca ou o tamanho desejado.</p></div></li><li><span>02</span><div><h3>Confirme os detalhes</h3><p>Consulte preço e disponibilidade antes de ir à loja.</p></div></li><li><span>03</span><div><h3>Combine a visita</h3><p>Confira o endereço e o horário de atendimento.</p></div></li></ol><ContactLink subject="produtos da loja">Consultar um produto</ContactLink></div></div></section>
+    <div class="container page-end"><p>O site apresenta categorias. Marcas, preços e estoque são consultados diretamente na conversa.</p><a class="text-link" href="/perguntas-frequentes/">Dúvidas sobre a loja <Icon name="arrow" /></a></div>
+  </>}
+
+  {page.slug === 'perguntas-frequentes' && <><Faq /><section class="container page-end"><div><h2>Ficou alguma dúvida?</h2><p>Você não precisa resolver tudo por aqui. Conte o que procura e continue a conversa.</p></div><ContactLink>Falar pelo WhatsApp</ContactLink></section></>}
+
+  {page.slug === 'contato' && <>
+    <section class="contact-page section-space"><div class="container contact-page-grid"><div class="contact-main"><Icon name="whatsapp" size={48} /><h2>Um olá já é um começo.</h2><p>{site.demo ? 'O contato desta demonstração é da Ghati. Quer conversar sobre um site assim para o seu negócio?' : 'Conte sobre seu pet ou sobre o produto que procura. Vamos combinar os próximos passos.'}</p><ContactLink>Conversar pelo WhatsApp</ContactLink><a class="phone-link" href={`tel:+${site.demo ? site.demoPhone : site.businessPhone}`}>{site.demo ? site.demoPhoneLabel : site.businessPhone}</a></div><div class="local-information"><article><Icon name="pin" size={28} /><h2>Onde estamos</h2><p><strong>{site.city}, {site.state}</strong></p><p>{site.demo ? 'Praia Grande é o contexto local deste exemplo. Não há uma loja física do Pátio Pet ou um endereço para visita.' : `${site.address} · ${site.neighborhood} · CEP ${site.postalCode}`}</p>{!site.demo && site.mapsUrl && <a class="text-link" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">Ver rota no Google Maps ↗</a>}</article><article><Icon name="sun" size={28} /><h2>Horário de atendimento</h2><p>{site.demo ? 'Os horários serão preenchidos com os dados reais do estabelecimento. Esta demonstração não recebe agendamentos para pets.' : site.hoursLabel}</p></article>{site.socialUrl && <a class="text-link" href={site.socialUrl} target="_blank" rel="noopener noreferrer">Encontre a gente no Instagram ↗</a>}</div></div></section>
+    {hasServices && <section class="preparation"><div class="container preparation-grid"><div><p class="eyebrow">ANTES DA CONVERSA</p><h2>Já sabe qual cuidado procura?</h2></div><div><p class="section-intro">Informe o serviço, o porte e a pelagem do seu pet. Isso ajuda a consultar as opções antes da visita.</p><a class="text-link" href="/banho-e-tosa/">Ver os serviços <Icon name="arrow" /></a><a class="text-link" href="/perguntas-frequentes/">Consultar as dúvidas frequentes <Icon name="arrow" /></a></div></div></section>}
+  </>}
+</Base>

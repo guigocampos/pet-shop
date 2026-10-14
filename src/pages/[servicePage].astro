@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import Icon from '../components/Icon.astro';
+import ContactLink from '../components/ContactLink.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+export function getStaticPaths() {
+  return site.services.length ? [{ params: { servicePage: 'banho-e-tosa' } }] : [];
+}
+---
+<Base title={`Banho e tosa em ${site.city} | ${site.name}`} description={`Entenda banho, tosa e tosa higiênica, o que informar antes da visita e como consultar valores. ${site.name}${site.demo ? ': demonstração comercial' : ''} em ${site.city}.`}>
+  <section class="service-hero"><div class="container"><Breadcrumbs label="Serviços" /><p class="eyebrow">BANHO & TOSA · {site.city.toUpperCase()}</p><h1>Um cuidado bem<br />combinado.</h1><div class="service-hero-bottom"><p>Antes de escolher um serviço, vale entender o que seu pet precisa. Conheça as opções e tire suas dúvidas na conversa.</p><ContactLink subject="banho e tosa" /></div></div></section>
+  <section class="service-detail-section section-space"><div class="container">{site.services.map((service, index) => <article class="service-detail" id={service.id}><div class="service-detail-name"><span class="small-index">0{index + 1}</span><Icon name={service.icon} size={45} /><h2>{service.name}</h2></div><div><p class="detail-lead">{service.description}</p><p>{service.detail}</p><ContactLink subject={service.name.toLowerCase()} variant="text">Consultar {service.name.toLowerCase()}</ContactLink></div></article>)}</div></section>
+  <section class="preparation"><div class="container preparation-grid"><div><p class="eyebrow">ANTES DE SAIR DE CASA</p><h2>Uma visita mais<br />tranquila começa aqui.</h2></div><ul><li>Informe sensibilidades, comportamento e orientações veterinárias.</li><li>Confirme o serviço, o valor e o horário antes da visita.</li><li>Use guia ou transporte adequado para chegar com seu pet.</li><li>Converse sobre o tempo estimado e como será avisado ao final.</li></ul></div></section>
+  <section class="container page-end"><div><h2>Antes da visita</h2><p>Veja as dúvidas frequentes sobre o atendimento.</p></div><a class="text-link" href="/perguntas-frequentes/">Perguntas frequentes <Icon name="arrow" /></a></section>
+</Base>
