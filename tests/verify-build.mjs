@@ -24,6 +24,9 @@ for (const [route, html] of pages) {
   assert.match(html, /lang="pt-BR"/);
   assert.match(html, /name="description" content="[^"]+"/);
   assert.doesNotMatch(html, /fraunces-latin|nunito-sans-latin/);
+  assert.match(html, /property="og:image" content="https:\/\/[^" ]+\/images\/social-cover\.jpg"/);
+  if (route === "/404/") assert.doesNotMatch(html, /rel="canonical"/);
+  else assert.match(html, new RegExp(`rel="canonical" href="https://[^" ]+${route}"`));
   if (route !== "/404/")
     assert.ok(
       html.includes(`href="${route}" aria-current="page"`),
@@ -34,6 +37,7 @@ for (const [route, html] of pages) {
       const url = new URL(href.replaceAll("&amp;", "&"));
       assert.equal(url.pathname, "/5513978143448");
       assert.match(url.searchParams.get("text"), /Ghati.*demonstração/);
+      assert.match(url.searchParams.get("text"), /quero um site assim para meu pet shop/);
     } else if (href.startsWith("/") || href.startsWith("#")) {
       const [path, hash] = href.split("#");
       if (path && !routes.has(path)) {
@@ -51,6 +55,9 @@ for (const [route, html] of pages) {
 }
 assert.doesNotMatch(pages.get("/"), /<details/);
 assert.match(pages.get("/perguntas-frequentes/"), /<details/);
+assert.match(pages.get("/perguntas-frequentes/"), /não recebe agendamentos para pets/);
+assert.match(pages.get("/contato/"), /WhatsApp e telefone comerciais da Ghati/);
+assert.match(pages.get("/banho-e-tosa/"), /Como o valor é definido/);
 assert.equal(
   new Set(
     [...pages.values()].map((html) => html.match(/<title>(.*?)<\/title>/)[1]),

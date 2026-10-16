@@ -46,7 +46,7 @@ export const site = {
     description:
       "Cada pet tem seu jeito. Entender a rotina, a pelagem e o que deixa seu companheiro confortável é o primeiro passo para combinar o atendimento.",
     introduction:
-      "O Pátio Pet foi pensado para fazer parte da rotina de quem divide a vida com um pet. Um lugar para conversar sobre cuidados, conhecer opções de banho e tosa e encontrar os essenciais para o dia a dia.",
+      "Um pet shop de bairro começa por conhecer quem chega: o pet e seu tutor. Essa é a ideia do Pátio Pet — reunir cuidados com a pelagem e itens do dia a dia em uma experiência simples e próxima.",
     principles: [
       {
         title: "Cada pet tem seu jeito",
@@ -66,7 +66,7 @@ export const site = {
     {
       id: "banho",
       name: "Banho",
-      short: "Um respiro na rotina. E um pelo bem cuidado.",
+      short: "Limpeza, secagem e escovação da pelagem.",
       description:
         "Limpeza da pelagem, secagem e escovação. Conte sobre a rotina e as necessidades do seu pet para combinar os cuidados antes do atendimento.",
       detail:
@@ -76,7 +76,7 @@ export const site = {
     {
       id: "tosa",
       name: "Tosa",
-      short: "Um corte pensado para o seu companheiro.",
+      short: "Comprimento e corte combinados com o tutor.",
       description:
         "Ajuste do comprimento da pelagem de acordo com o tipo de pelo e o corte combinado com o tutor.",
       detail:
@@ -86,7 +86,7 @@ export const site = {
     {
       id: "tosa-higienica",
       name: "Tosa higiênica",
-      short: "Pequenos cuidados que facilitam o dia a dia.",
+      short: "Aparos que ajudam na higiene do dia a dia.",
       description:
         "Aparo em regiões que precisam de mais atenção à higiene, conforme as necessidades do animal.",
       detail:
@@ -98,16 +98,22 @@ export const site = {
     {
       name: "Alimentação",
       description: "Rações e petiscos para diferentes fases da vida.",
+      examples: ["Rações secas e úmidas", "Petiscos", "Opções por fase de vida"],
+      guidance: "Na consulta, informe a espécie, a idade e a alimentação habitual do pet.",
       icon: "bowl",
     },
     {
       name: "Acessórios",
-      description: "Guias, brinquedos e companhia para os passeios.",
+      description: "Itens para passear, brincar e descansar.",
+      examples: ["Guias e coleiras", "Brinquedos", "Camas e comedouros"],
+      guidance: "Medidas, porte e hábitos ajudam a escolher o tamanho e o tipo de acessório.",
       icon: "ball",
     },
     {
       name: "Higiene",
       description: "Os essenciais para os cuidados entre um banho e outro.",
+      examples: ["Tapetes higiênicos", "Escovas e pentes", "Itens de higiene"],
+      guidance: "Conte qual item procura e siga as orientações do veterinário para produtos específicos.",
       icon: "bottle",
     },
   ],
@@ -126,6 +132,19 @@ export const site = {
     },
   ],
   faq: [
+    {
+      question: "O Pátio Pet é um pet shop real?",
+      category: "general",
+      demoOnly: true,
+      answer:
+        "Não. É uma marca fictícia criada pela Ghati Inovações para demonstrar um site institucional. Não há loja física, venda de produtos ou atendimento para pets. Os contatos abrem uma conversa comercial com a Ghati sobre criação de sites.",
+    },
+    {
+      question: "O que influencia o valor do banho ou da tosa?",
+      category: "services",
+      answer:
+        "Porte, tipo e condição da pelagem, além do serviço escolhido, podem influenciar o orçamento. Confirme o que está incluído e o valor antes de autorizar o atendimento.",
+    },
     {
       question: "Como consultar valores e horários?",
       category: "services",
@@ -154,7 +173,9 @@ export const site = {
       question: "O agendamento é confirmado pelo site?",
       category: "services",
       answer:
-        "O botão de contato abre uma conversa. O atendimento só fica combinado depois da confirmação do serviço, do valor e do horário pelo estabelecimento. Não há agenda automática no site.",
+        "Não. O botão abre uma conversa para combinar serviço, valor e horário com a equipe. O agendamento depende da confirmação do estabelecimento.",
+      demoAnswer:
+        "Não. Em um pet shop real, o botão abre uma conversa para combinar serviço, valor e horário com a equipe. Aqui, por ser uma demonstração, o WhatsApp pertence à Ghati e não recebe agendamentos para pets.",
     },
     {
       question: "Como preparar meu pet para a visita?",
@@ -172,12 +193,14 @@ export const site = {
       question: "Como entro em contato?",
       category: "general",
       answer:
+        "A página Contato reúne o telefone, o WhatsApp e as informações para planejar sua visita.",
+      demoAnswer:
         "A página Contato reúne o telefone e o acesso ao WhatsApp. Nesta demonstração, eles direcionam ao contato comercial da Ghati; o Pátio Pet é um negócio fictício.",
     },
   ],
 };
 
-export const siteUrl = publishingUrl(site);
+export const siteUrl = publishingUrl({ ...site, domain: site.domain || (site.demo ? "https://pet-shop-pied-delta.vercel.app" : "") });
 export const hasServices = site.services.length > 0;
 export const hasProducts = site.sections.products && site.products.length > 0;
 export const infoPages = [
@@ -186,7 +209,7 @@ export const infoPages = [
         {
           slug: "quem-somos",
           label: "Quem somos",
-          title: "Um lugar para o seu pet. E para você.",
+          title: "Cada pet tem seu jeito.",
           intro: site.about.introduction,
         },
       ]
@@ -196,7 +219,7 @@ export const infoPages = [
         {
           slug: "loja",
           label: "Loja",
-          title: "Os favoritos da rotina do seu pet.",
+          title: "Essenciais para o dia a dia.",
           intro:
             "Alimentação, acessórios e higiene para acompanhar os cuidados em casa. Conheça as categorias e consulte os itens que procura.",
         },
@@ -205,15 +228,17 @@ export const infoPages = [
   {
     slug: "perguntas-frequentes",
     label: "Perguntas frequentes",
-    title: "Dúvidas pequenas também merecem atenção.",
+    title: "Perguntas frequentes.",
     intro:
-      "Encontre as respostas antes da visita ou da consulta sobre produtos. Se precisar, a conversa continua pelo WhatsApp.",
+      "Saiba o que perguntar antes de combinar um banho, escolher uma tosa ou consultar um produto.",
   },
   {
     slug: "contato",
     label: "Contato",
-    title: "Pode chegar. A conversa começa aqui.",
-    intro: `Quer combinar um cuidado ou consultar os essenciais para seu pet? Veja como falar com a gente em ${site.city}.`,
+    title: site.demo ? "Gostou do Pátio? Vamos conversar." : "Fale com a gente.",
+    intro: site.demo
+      ? "Este pet shop é fictício. O contato abaixo é da Ghati Inovações, para quem quer um site assim representando o próprio negócio."
+      : `Consulte serviços, produtos e informações para visitar o ${site.name} em ${site.city}.`,
   },
 ];
 export const navigation = [
@@ -224,14 +249,14 @@ export const navigation = [
 export const pagePaths = navigation.map((link) => link.href);
 export const visibleFaq = site.faq.filter(
   (item) =>
-    item.category === "general" ||
+    (!item.demoOnly || site.demo) && (item.category === "general" ||
     (item.category === "services" && hasServices) ||
-    (item.category === "products" && hasProducts),
-);
+    (item.category === "products" && hasProducts)),
+).map(item => ({ ...item, answer: site.demo && item.demoAnswer ? item.demoAnswer : item.answer }));
 
 export function whatsappUrl(subject = "") {
   const message = site.demo
-    ? `Olá, Ghati! Estou conhecendo a demonstração do ${site.name}${subject ? ` e quero consultar sobre ${subject}` : " e quero saber mais sobre o site"}.`
+    ? `Olá, Ghati! Conheci a demonstração do ${site.name} e quero um site assim para meu pet shop.${subject ? ` Gostei da apresentação de ${subject}.` : ""}`
     : `Olá! Vim pelo site do ${site.name}${subject ? ` e quero consultar sobre ${subject}` : " e gostaria de falar com vocês"}.`;
   return contactUrl(site.demo ? site.demoPhone : site.businessPhone, message);
 }

@@ -3,5 +3,5 @@ import { visibleFaq } from '../data/site';
 const groups = [{ id: 'services', label: 'Banho e tosa' }, { id: 'products', label: 'Loja e produtos' }, { id: 'general', label: 'Contato' }];
 ---
 <section class="faq-section section-space" id="duvidas">
-  <div class="container faq-groups">{groups.filter(group => visibleFaq.some(item => item.category === group.id)).map(group => <div class="faq-group"><h2>{group.label}</h2><div class="faq-list">{visibleFaq.filter(item => item.category === group.id).map(item => <details><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></div>)}</div>
+  <div class="container faq-groups">{groups.filter(group => visibleFaq.some(item => item.category === group.id)).map(group => <section class="faq-group" id={`faq-${group.id}`} aria-labelledby={`heading-${group.id}`}><h2 id={`heading-${group.id}`}>{group.label}</h2><div class="faq-list">{visibleFaq.filter(item => item.category === group.id).map(item => <details><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></section>)}</div>
 </section>

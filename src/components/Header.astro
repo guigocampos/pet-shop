@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname;
     <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" hidden><span>Menu</span><span class="menu-bars" aria-hidden="true"></span></button>
     <nav id="mobile-nav" class="mobile-nav" aria-label="Principal no celular" hidden>
       {navigation.map(link => <a href={link.href} aria-current={link.href === currentPath ? 'page' : undefined}>{link.label}</a>)}
-      <ContactLink>Vamos conversar</ContactLink>
+      <ContactLink commercial={site.demo}>{site.demo ? 'Quero um site assim' : 'Vamos conversar'}</ContactLink>
     </nav>
   </div>
 </header>
